@@ -1,0 +1,34 @@
+{
+  "name": "freelancing-app",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"pnpm --filter @freelancing-app/api dev\" \"pnpm --filter @freelancing-app/web dev\"",
+    "backend": "pnpm --filter @freelancing-app/api dev",
+    "frontend": "pnpm --filter @freelancing-app/web dev",
+    "commit": "git-cz"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "^11.20.0",
+      "onFail": "download"
+    }
+  },
+  "devDependencies": {
+    "commitizen": "^4.3.2",
+    "concurrently": "^10.0.4",
+    "cz-git": "^1.13.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-git",
+      "czConfig": "./.commitlintrc.js"
+    }
+  }
+}
