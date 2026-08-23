@@ -20,7 +20,15 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "rootDir": "./",
+    "paths": {
+      "@/*": ["./src/*"]
+      // "@/features/*": ["./src/features/*"],
+      // "@/ui/*": ["./src/ui/*"],
+      // "@/routes/*": ["./src/routes/*"],
+      // "@/components/*": ["./src/components/*"]
+    }
   },
   "include": ["src"]
 }
