@@ -4,7 +4,7 @@ import SendOTPForm from "./components/SendOTPForm";
 import type { AuthStep } from "./types/authSteps";
 
 export default function Auth() {
-  const [step, setStep] = useState<AuthStep>("check-otp");
+  const [step, setStep] = useState<AuthStep>("send-otp");
   return (
     <div className="flex h-screen items-center justify-center w-full">
       <div className="border rounded-lg border-gray-200 w-sm p-4 mx-2 sm:mx-auto sm:p-10">

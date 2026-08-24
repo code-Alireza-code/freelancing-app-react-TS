@@ -16,8 +16,9 @@ type CheckOTPFormProps = {
 };
 
 export default function CheckOTPForm({ setStep }: CheckOTPFormProps) {
-  const otpTime = 120;
-  const { start, isFinished, remaining } = useCountdown(otpTime);
+  const { start, isFinished, remaining } = useCountdown(
+    import.meta.env.VITE_OTP_EXPIRATION_TIME,
+  );
   useEffect(() => {
     start();
   }, [start]);
@@ -57,7 +58,7 @@ export default function CheckOTPForm({ setStep }: CheckOTPFormProps) {
             labelClassName="font-thin opacity-50 text-sm"
           />
           <div className="text-center text-sm">
-            {!isFinished ? (
+            {isFinished ? (
               <button type="button">
                 <span className="underline underline-offset-4 hover:text-primary-800">
                   ارسال مجدد کد

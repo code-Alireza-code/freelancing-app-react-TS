@@ -6,7 +6,8 @@ interface ViteTypeOptions {
 
 interface ImportMetaEnv {
   readonly VITE_APP_TITLE: string;
-  // more env variables...
+  readonly VITE_BACKEND_BASE_URL: string;
+  readonly VITE_OTP_EXPIRATION_TIME: number;
 }
 
 interface ImportMeta {

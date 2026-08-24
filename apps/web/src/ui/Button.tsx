@@ -1,8 +1,9 @@
-import type { ButtonHTMLAttributes } from "react";
+import type { ButtonHTMLAttributes, ReactNode } from "react";
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: "primary" | "secondary" | "danger" | "outline";
   loading?: boolean;
+  loadingContent?: ReactNode;
 };
 
 function Button({
@@ -12,6 +13,7 @@ function Button({
   className = "",
   disabled,
   type = "button",
+  loadingContent = "Loading...",
   ...rest
 }: ButtonProps) {
   return (
@@ -21,7 +23,7 @@ function Button({
       disabled={disabled || loading}
       className={`btn btn--${variant} ${className}`}
     >
-      {loading ? "Loading..." : children}
+      {loading ? loadingContent : children}
     </button>
   );
 }

@@ -5,6 +5,7 @@ import { RouterProvider } from "@tanstack/react-router";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./config/query-client";
 import { router } from "./config/router";
+import { Toaster } from "sonner";
 
 // Register the router instance for type safety
 declare module "@tanstack/react-router" {
@@ -19,6 +20,16 @@ if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <QueryClientProvider client={queryClient}>
+      <Toaster
+        position="top-center"
+        richColors
+        duration={10000}
+        toastOptions={{
+          classNames: {
+            title: "sm:text-base font-bold",
+          },
+        }}
+      />
       <RouterProvider router={router} />
     </QueryClientProvider>,
   );
