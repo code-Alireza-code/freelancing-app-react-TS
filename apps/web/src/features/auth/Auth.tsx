@@ -5,6 +5,7 @@ import type { AuthStep } from "./types/authSteps";
 
 export default function Auth() {
   const [step, setStep] = useState<AuthStep>("send-otp");
+  const [phoneNumber, setPhoneNumber] = useState("");
   return (
     <div className="flex h-screen items-center justify-center w-full">
       <div className="border rounded-lg border-gray-200 w-sm p-4 mx-2 sm:mx-auto sm:p-10">
@@ -13,9 +14,19 @@ export default function Auth() {
             فریلنسینگ اپ
           </h1>
           {step === "send-otp" ? (
-            <SendOTPForm setStep={setStep} />
+            <SendOTPForm
+              onSuccess={(phoneNumber) => {
+                setPhoneNumber(phoneNumber);
+                setStep("check-otp");
+              }}
+            />
           ) : (
-            <CheckOTPForm setStep={setStep} />
+            <CheckOTPForm
+              onBack={() => {
+                setStep("send-otp");
+              }}
+              phoneNumber={phoneNumber}
+            />
           )}
         </div>
       </div>

@@ -3,41 +3,66 @@ import { CheckOtpSchema, type CheckOtpDataType } from "../schema/authSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import TextField from "@/ui/TextField";
 import Button from "@/ui/Button";
-import { useEffect, type Dispatch } from "react";
-import type { AuthStep } from "../types/authSteps";
+import { useEffect } from "react";
 import { LuArrowRight } from "react-icons/lu";
 import ButtonIcon from "@/ui/ButtonIcon";
 import { useCountdown } from "@/hooks/useCountdown";
 import { formatTime } from "@/utils/timeFormatter";
 import { toPersianNumbers } from "@/utils/toPersianNumbers";
+import { useCheckOTP, useResendOTP } from "../queries/authQueries";
+import { toast } from "sonner";
+import { useNavigate } from "@tanstack/react-router";
 
 type CheckOTPFormProps = {
-  setStep: Dispatch<React.SetStateAction<AuthStep>>;
+  onBack: () => void;
+  phoneNumber: string;
 };
 
-export default function CheckOTPForm({ setStep }: CheckOTPFormProps) {
+export default function CheckOTPForm({
+  onBack,
+  phoneNumber,
+}: CheckOTPFormProps) {
   const { start, isFinished, remaining } = useCountdown(
     import.meta.env.VITE_OTP_EXPIRATION_TIME,
   );
   useEffect(() => {
     start();
   }, [start]);
+
+  const navigate = useNavigate();
+
+  const { checkOTP, isCheckingOTP } = useCheckOTP();
   const hookForm = useForm<CheckOtpDataType>({
     resolver: zodResolver(CheckOtpSchema),
     defaultValues: {
       otp: "",
     },
   });
-  const onSubmit = (data: CheckOtpDataType) => {
-    console.log(data.otp);
+  const handleCheckOTP = async (data: CheckOtpDataType) => {
+    try {
+      const { user, message } = await checkOTP({ ...data, phoneNumber });
+      if (user.active) {
+        // push to panel based on role
+      } else {
+        navigate({ to: "/complete-profile" });
+      }
+    } catch (error: any) {
+      toast.error(error?.response?.data?.message ?? "something went wrong");
+    }
+  };
+
+  // handle resendOtp
+  const { resendOTP, isResendingOTP } = useResendOTP();
+  const handleResendOtp = async () => {
+    try {
+      await resendOTP({ phoneNumber });
+      start();
+    } catch (error) {}
   };
 
   return (
     <div className="w-full">
-      <ButtonIcon
-        className="absolute -top-5"
-        onClick={() => setStep("send-otp")}
-      >
+      <ButtonIcon className="absolute -top-5" onClick={onBack}>
         <LuArrowRight className="size-5" />
       </ButtonIcon>
       <FormProvider {...hookForm}>
@@ -45,7 +70,7 @@ export default function CheckOTPForm({ setStep }: CheckOTPFormProps) {
         <form
           className="space-y-8"
           noValidate
-          onSubmit={hookForm.handleSubmit(onSubmit)}
+          onSubmit={hookForm.handleSubmit(handleCheckOTP)}
         >
           <TextField<CheckOtpDataType>
             name="otp"
@@ -59,10 +84,13 @@ export default function CheckOTPForm({ setStep }: CheckOTPFormProps) {
           />
           <div className="text-center text-sm">
             {isFinished ? (
-              <button type="button">
-                <span className="underline underline-offset-4 hover:text-primary-800">
-                  ارسال مجدد کد
-                </span>
+              <button
+                type="button"
+                className="underline underline-offset-4 hover:text-primary-800 disabled:text-secondary-300 disabled:bg-secondary-0"
+                disabled={isResendingOTP}
+                onClick={handleResendOtp}
+              >
+                <span>ارسال مجدد کد</span>
               </button>
             ) : (
               <span>
@@ -70,7 +98,13 @@ export default function CheckOTPForm({ setStep }: CheckOTPFormProps) {
               </span>
             )}
           </div>
-          <Button type="submit" variant="primary">
+          <Button
+            type="submit"
+            variant="primary"
+            className="font-medium text-sm disabled:bg-secondary-400"
+            loading={isCheckingOTP}
+            loadingContent="درحال ارسال اطلاعات ..."
+          >
             تایید
           </Button>
         </form>

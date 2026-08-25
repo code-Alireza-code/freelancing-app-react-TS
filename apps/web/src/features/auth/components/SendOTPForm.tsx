@@ -3,15 +3,14 @@ import { SendOtpSchema, type SendOtpDataType } from "../schema/authSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import TextField from "@/ui/TextField";
 import Button from "@/ui/Button";
-import type { Dispatch } from "react";
-import type { AuthStep } from "../types/authSteps";
 import { useSendOTP } from "../queries/authQueries";
+import { toast } from "sonner";
 
 type SendOTPFormProps = {
-  setStep: Dispatch<React.SetStateAction<AuthStep>>;
+  onSuccess: (phoneNumber: string) => void;
 };
 
-export default function SendOTPForm({ setStep }: SendOTPFormProps) {
+export default function SendOTPForm({ onSuccess }: SendOTPFormProps) {
   const { sendOTP, isSendingOTP } = useSendOTP();
   const hookForm = useForm<SendOtpDataType>({
     resolver: zodResolver(SendOtpSchema),
@@ -21,10 +20,12 @@ export default function SendOTPForm({ setStep }: SendOTPFormProps) {
   });
 
   const handleSendOTP = async (data: SendOtpDataType) => {
-    await sendOTP(data);
-
-    // go to second step of form
-    setStep("check-otp");
+    try {
+      await sendOTP(data);
+      onSuccess(data.phoneNumber);
+    } catch (error: any) {
+      toast.error(error?.response?.data?.message ?? "something went wrong");
+    }
   };
 
   return (
@@ -52,7 +53,7 @@ export default function SendOTPForm({ setStep }: SendOTPFormProps) {
             loading={isSendingOTP}
             loadingContent="درحال ورود ."
           >
-            ورود به فریلسینگ اپ
+            ورود به فریلنسینگ اپ
           </Button>
         </form>
       </FormProvider>

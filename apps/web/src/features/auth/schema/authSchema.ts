@@ -18,3 +18,5 @@ export const CheckOtpSchema = z.object({
 });
 
 export type CheckOtpDataType = z.infer<typeof CheckOtpSchema>;
+
+export type CheckOtpDto = SendOtpDataType & CheckOtpDataType;
