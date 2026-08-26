@@ -49,7 +49,6 @@ export default function SendOTPForm({ onSuccess }: SendOTPFormProps) {
           <Button
             type="submit"
             variant="primary"
-            className="font-medium text-sm disabled:bg-secondary-400"
             loading={isSendingOTP}
             loadingContent="درحال ورود ."
           >

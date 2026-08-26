@@ -17,14 +17,14 @@ const UserSchema = new mongoose.Schema(
     isVerifiedPhoneNumber: { type: Boolean, default: false },
     isActive: { type: Boolean, default: false },
     status: { type: Number, required: true, default: 1, enum: [0, 1, 2] }, // 0, 1, 2
-    role: { type: String, default: "OWNER" }, // default role is OWNER
+    role: { type: String, default: null }, // default role is null
   },
   {
     timestamps: true,
     toJSON: {
       virtuals: true,
     },
-  }
+  },
 );
 
 UserSchema.virtual("avatarUrl").get(function () {

@@ -13,7 +13,7 @@ function Button({
   className = "",
   disabled,
   type = "button",
-  loadingContent = "Loading...",
+  loadingContent = "در حال انجام ...",
   ...rest
 }: ButtonProps) {
   return (

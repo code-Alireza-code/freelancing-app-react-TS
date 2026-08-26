@@ -12,6 +12,7 @@ import { toPersianNumbers } from "@/utils/toPersianNumbers";
 import { useCheckOTP, useResendOTP } from "../queries/authQueries";
 import { toast } from "sonner";
 import { useNavigate } from "@tanstack/react-router";
+import { UserRoles } from "../types/userRole";
 
 type CheckOTPFormProps = {
   onBack: () => void;
@@ -40,9 +41,17 @@ export default function CheckOTPForm({
   });
   const handleCheckOTP = async (data: CheckOtpDataType) => {
     try {
-      const { user, message } = await checkOTP({ ...data, phoneNumber });
-      if (user.active) {
+      const { user } = await checkOTP({ ...data, phoneNumber });
+      console.log(user);
+      if (user.isActive) {
         // push to panel based on role
+        // if(user.role === UserRoles.FREELANCER) {
+        //   navigate({to:"/freelancer"})
+        // }
+        // if(user.role === UserRoles.OWNER) {
+        //   navigate({to:"/owner"})
+        // }
+        navigate({ to: "/" });
       } else {
         navigate({ to: "/complete-profile" });
       }
