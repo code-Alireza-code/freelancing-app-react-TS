@@ -42,7 +42,6 @@ export default function CheckOTPForm({
   const handleCheckOTP = async (data: CheckOtpDataType) => {
     try {
       const { user } = await checkOTP({ ...data, phoneNumber });
-      console.log(user);
       if (user.isActive) {
         // push to panel based on role
         // if(user.role === UserRoles.FREELANCER) {
