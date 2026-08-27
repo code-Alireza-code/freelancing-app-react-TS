@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "route:generate": "tsr generate"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.7.1",
@@ -28,6 +29,7 @@
     "@babel/core": "^7.29.7",
     "@rolldown/plugin-babel": "^0.2.3",
     "@tanstack/react-query-devtools": "^5.102.2",
+    "@tanstack/router-cli": "^1.167.33",
     "@tanstack/router-plugin": "^1.168.24",
     "@types/babel__core": "^7.20.5",
     "@types/node": "^24.13.3",

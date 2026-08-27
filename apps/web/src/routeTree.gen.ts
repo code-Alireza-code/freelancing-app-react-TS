@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DashboardLayoutRouteImport } from './routes/_dashboardLayout'
 import { Route as CompleteProfileRouteImport } from './routes/complete-profile'
 import { Route as AuthIndexRouteImport } from './routes/auth/index'
+import { Route as DashboardLayoutOwnerIndexRouteImport } from './routes/_dashboardLayout/owner/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardLayoutRoute = DashboardLayoutRouteImport.update({
+  id: '/_dashboardLayout',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CompleteProfileRoute = CompleteProfileRouteImport.update({
@@ -28,33 +34,50 @@ const AuthIndexRoute = AuthIndexRouteImport.update({
   path: '/auth/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardLayoutOwnerIndexRoute =
+  DashboardLayoutOwnerIndexRouteImport.update({
+    id: '/owner/',
+    path: '/owner/',
+    getParentRoute: () => DashboardLayoutRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/complete-profile': typeof CompleteProfileRoute
   '/auth/': typeof AuthIndexRoute
+  '/owner/': typeof DashboardLayoutOwnerIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/complete-profile': typeof CompleteProfileRoute
   '/auth': typeof AuthIndexRoute
+  '/owner': typeof DashboardLayoutOwnerIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_dashboardLayout': typeof DashboardLayoutRouteWithChildren
   '/complete-profile': typeof CompleteProfileRoute
   '/auth/': typeof AuthIndexRoute
+  '/_dashboardLayout/owner/': typeof DashboardLayoutOwnerIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/complete-profile' | '/auth/'
+  fullPaths: '/' | '/complete-profile' | '/auth/' | '/owner/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/complete-profile' | '/auth'
-  id: '__root__' | '/' | '/complete-profile' | '/auth/'
+  to: '/' | '/complete-profile' | '/auth' | '/owner'
+  id:
+    | '__root__'
+    | '/'
+    | '/_dashboardLayout'
+    | '/complete-profile'
+    | '/auth/'
+    | '/_dashboardLayout/owner/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DashboardLayoutRoute: typeof DashboardLayoutRouteWithChildren
   CompleteProfileRoute: typeof CompleteProfileRoute
   AuthIndexRoute: typeof AuthIndexRoute
 }
@@ -66,6 +89,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_dashboardLayout': {
+      id: '/_dashboardLayout'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof DashboardLayoutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/complete-profile': {
@@ -82,11 +112,31 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_dashboardLayout/owner/': {
+      id: '/_dashboardLayout/owner/'
+      path: '/owner'
+      fullPath: '/owner/'
+      preLoaderRoute: typeof DashboardLayoutOwnerIndexRouteImport
+      parentRoute: typeof DashboardLayoutRoute
+    }
   }
 }
 
+interface DashboardLayoutRouteChildren {
+  DashboardLayoutOwnerIndexRoute: typeof DashboardLayoutOwnerIndexRoute
+}
+
+const DashboardLayoutRouteChildren: DashboardLayoutRouteChildren = {
+  DashboardLayoutOwnerIndexRoute: DashboardLayoutOwnerIndexRoute,
+}
+
+const DashboardLayoutRouteWithChildren = DashboardLayoutRoute._addFileChildren(
+  DashboardLayoutRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DashboardLayoutRoute: DashboardLayoutRouteWithChildren,
   CompleteProfileRoute: CompleteProfileRoute,
   AuthIndexRoute: AuthIndexRoute,
 }
