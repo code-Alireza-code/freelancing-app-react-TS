@@ -15,7 +15,7 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 
 function RootLayout() {
   return (
-    <>
+    <div className="text-secondary-800">
       <Outlet />
       {import.meta.env.MODE === "development" && (
         <>
@@ -23,6 +23,6 @@ function RootLayout() {
           <TanStackRouterDevtools />
         </>
       )}
-    </>
+    </div>
   );
 }
