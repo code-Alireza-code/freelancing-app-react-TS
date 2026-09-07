@@ -7,3 +7,7 @@ export async function getOwnerProjectsApi(): Promise<ProjectData[]> {
     .then(({ data }) => data.data);
   return ProjectsSchema.parse(projects);
 }
+
+export async function removeProjectApi(projectId: string) {
+  return http.delete(`/project/${projectId}`).then(({ data }) => data.data);
+}

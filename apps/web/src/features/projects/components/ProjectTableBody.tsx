@@ -1,3 +1,4 @@
+import ActionButtons from "@/features/projects/components/ActionButtons";
 import { Table } from "@/components/Table";
 import type { Projects } from "@/schemas/project";
 import { toPersianNumbersWithComma } from "@/utils/toPersianNumbers";
@@ -32,7 +33,9 @@ export default function ProjectTableBody({ projects }: { projects: Projects }) {
               <span className="badge badge--danger">بسته</span>
             )}
           </Table.Cell>
-          <Table.Cell>عملیات</Table.Cell>
+          <Table.Cell>
+            <ActionButtons project={project} />
+          </Table.Cell>
         </Table.Row>
       ))}
     </Table.Body>
