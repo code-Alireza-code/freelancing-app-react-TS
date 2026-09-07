@@ -1,9 +1,20 @@
+import { Loading } from "@/components/Loading";
+import ProjectsTable from "@/features/projects/ProjectsTable";
+import { ownerProjectsQueryOptions } from "@/features/projects/queries/projectQueries";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_dashboardLayout/owner/projects/")({
+  loader: ({ context }) => {
+    return context.queryClient.ensureQueryData(ownerProjectsQueryOptions);
+  },
   component: RouteComponent,
+  pendingComponent: Loading,
 });
 
 function RouteComponent() {
-  return <div>Hello "/_dashboardLayout/owner/projects/"!</div>;
+  return (
+    <div>
+      <ProjectsTable />
+    </div>
+  );
 }
