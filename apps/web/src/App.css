@@ -271,3 +271,8 @@
   background-color: rgb(var(--color-secondary-500-rgb)) !important;
   color: rgb(var(--color-secondary-100-rgb));
 }
+
+[data-sonner-toaster],
+[data-sonner-toaster] * {
+  font-family: "Vazir", sans-serif !important;
+}

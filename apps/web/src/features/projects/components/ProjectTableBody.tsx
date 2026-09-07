@@ -2,6 +2,7 @@ import ActionButtons from "@/features/projects/components/ActionButtons";
 import { Table } from "@/components/Table";
 import type { Projects } from "@/schemas/project";
 import { toPersianNumbersWithComma } from "@/utils/toPersianNumbers";
+import { Status } from "./Status";
 
 export default function ProjectTableBody({ projects }: { projects: Projects }) {
   return (
@@ -25,13 +26,11 @@ export default function ProjectTableBody({ projects }: { projects: Projects }) {
                 ))}
             </div>
           </Table.Cell>
-          <Table.Cell>{project?.freelancer?.name || "---"}</Table.Cell>
           <Table.Cell>
-            {project.status === "OPEN" ? (
-              <span className="badge badge--success">باز</span>
-            ) : (
-              <span className="badge badge--danger">بسته</span>
-            )}
+            <span>{project?.freelancer?.name || "---"}</span>
+          </Table.Cell>
+          <Table.Cell>
+            <Status project={project} />
           </Table.Cell>
           <Table.Cell>
             <ActionButtons project={project} />

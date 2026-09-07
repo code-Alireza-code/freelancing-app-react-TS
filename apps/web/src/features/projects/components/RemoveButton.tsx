@@ -5,6 +5,7 @@ import ButtonIcon from "@/ui/ButtonIcon";
 import { useState } from "react";
 import { IoMdTrash } from "react-icons/io";
 import { useRemoveOwnerProject } from "../queries/projectQueries";
+import { toast } from "sonner";
 
 type Props = { project: Project };
 
@@ -15,8 +16,17 @@ export function RemoveButton({ project }: Props) {
   const { removeProject, isRemoving } = useRemoveOwnerProject();
 
   const handleDelete = async () => {
-    await removeProject(project._id);
-    handleCloseModal();
+    try {
+      const data = await removeProject(project._id);
+      handleCloseModal();
+      toast.success(data?.message || "پروژه با موفقیت حذف شد !");
+    } catch (error: any) {
+      toast.error(
+        error?.response?.data?.message ||
+          error?.message ||
+          "خطا در هنگام حذف !",
+      );
+    }
   };
 
   return (
@@ -27,7 +37,12 @@ export function RemoveButton({ project }: Props) {
         title={`آیا از حذف ${project.title} مطمئن هستید ؟`}
       >
         <div className="flex gap-x-2 h-10">
-          <Button variant="danger" onClick={handleDelete} loading={isRemoving}>
+          <Button
+            variant="danger"
+            onClick={handleDelete}
+            loading={isRemoving}
+            loadingContent="در حال حذف ..."
+          >
             بله
           </Button>
           <Button variant="primary" onClick={handleCloseModal}>

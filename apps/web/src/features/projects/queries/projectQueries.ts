@@ -1,4 +1,5 @@
 import {
+  changeProjectStatusApi,
   getOwnerProjectsApi,
   removeProjectApi,
 } from "@/services/projectService";
@@ -30,9 +31,24 @@ export const useRemoveOwnerProject = () => {
     mutationFn: removeProjectApi,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["owner-projects"],
+        queryKey: ownerProjectsQueryOptions.queryKey,
       });
     },
   });
   return { removeProject, isRemoving };
+};
+
+export const useChangeProjectStatus = () => {
+  const queryClient = useQueryClient();
+  const { mutateAsync: changeProjectStatus, isPending: isChanging } =
+    useMutation({
+      mutationFn: changeProjectStatusApi,
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: ownerProjectsQueryOptions.queryKey,
+        });
+      },
+    });
+
+  return { changeProjectStatus, isChanging };
 };
