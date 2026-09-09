@@ -33,5 +33,3 @@ export const ProjectsSchema = z.array(ProjectSchema);
 
 export type Project = z.infer<typeof ProjectSchema>;
 export type Projects = z.infer<typeof ProjectsSchema>;
-
-export type ProjectData = z.infer<typeof ProjectSchema>;

@@ -16,8 +16,8 @@ import { Route as AuthIndexRouteImport } from './routes/auth/index'
 import { Route as DashboardLayoutOwnerIndexRouteImport } from './routes/_dashboardLayout/owner/index'
 import { Route as DashboardLayoutOwnerDashboardIndexRouteImport } from './routes/_dashboardLayout/owner/dashboard/index'
 import { Route as DashboardLayoutOwnerProjectsIndexRouteImport } from './routes/_dashboardLayout/owner/projects/index'
-import { Route as DashboardLayoutOwnerProjectsProjectIdRouteImport } from './routes/_dashboardLayout/owner/projects/$projectId'
 import { Route as DashboardLayoutOwnerProjectsCreateRouteImport } from './routes/_dashboardLayout/owner/projects/create'
+import { Route as DashboardLayoutOwnerProjectsEditProjectIdRouteImport } from './routes/_dashboardLayout/owner/projects/edit/$projectId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -56,16 +56,16 @@ const DashboardLayoutOwnerProjectsIndexRoute =
     path: '/owner/projects/',
     getParentRoute: () => DashboardLayoutRoute,
   } as any)
-const DashboardLayoutOwnerProjectsProjectIdRoute =
-  DashboardLayoutOwnerProjectsProjectIdRouteImport.update({
-    id: '/owner/projects/$projectId',
-    path: '/owner/projects/$projectId',
-    getParentRoute: () => DashboardLayoutRoute,
-  } as any)
 const DashboardLayoutOwnerProjectsCreateRoute =
   DashboardLayoutOwnerProjectsCreateRouteImport.update({
     id: '/owner/projects/create',
     path: '/owner/projects/create',
+    getParentRoute: () => DashboardLayoutRoute,
+  } as any)
+const DashboardLayoutOwnerProjectsEditProjectIdRoute =
+  DashboardLayoutOwnerProjectsEditProjectIdRouteImport.update({
+    id: '/owner/projects/edit/$projectId',
+    path: '/owner/projects/edit/$projectId',
     getParentRoute: () => DashboardLayoutRoute,
   } as any)
 
@@ -74,20 +74,20 @@ export interface FileRoutesByFullPath {
   '/complete-profile': typeof CompleteProfileRoute
   '/auth/': typeof AuthIndexRoute
   '/owner/': typeof DashboardLayoutOwnerIndexRoute
-  '/owner/projects/$projectId': typeof DashboardLayoutOwnerProjectsProjectIdRoute
   '/owner/projects/create': typeof DashboardLayoutOwnerProjectsCreateRoute
   '/owner/dashboard/': typeof DashboardLayoutOwnerDashboardIndexRoute
   '/owner/projects/': typeof DashboardLayoutOwnerProjectsIndexRoute
+  '/owner/projects/edit/$projectId': typeof DashboardLayoutOwnerProjectsEditProjectIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/complete-profile': typeof CompleteProfileRoute
   '/auth': typeof AuthIndexRoute
   '/owner': typeof DashboardLayoutOwnerIndexRoute
-  '/owner/projects/$projectId': typeof DashboardLayoutOwnerProjectsProjectIdRoute
   '/owner/projects/create': typeof DashboardLayoutOwnerProjectsCreateRoute
   '/owner/dashboard': typeof DashboardLayoutOwnerDashboardIndexRoute
   '/owner/projects': typeof DashboardLayoutOwnerProjectsIndexRoute
+  '/owner/projects/edit/$projectId': typeof DashboardLayoutOwnerProjectsEditProjectIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -96,10 +96,10 @@ export interface FileRoutesById {
   '/complete-profile': typeof CompleteProfileRoute
   '/auth/': typeof AuthIndexRoute
   '/_dashboardLayout/owner/': typeof DashboardLayoutOwnerIndexRoute
-  '/_dashboardLayout/owner/projects/$projectId': typeof DashboardLayoutOwnerProjectsProjectIdRoute
   '/_dashboardLayout/owner/projects/create': typeof DashboardLayoutOwnerProjectsCreateRoute
   '/_dashboardLayout/owner/dashboard/': typeof DashboardLayoutOwnerDashboardIndexRoute
   '/_dashboardLayout/owner/projects/': typeof DashboardLayoutOwnerProjectsIndexRoute
+  '/_dashboardLayout/owner/projects/edit/$projectId': typeof DashboardLayoutOwnerProjectsEditProjectIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -108,20 +108,20 @@ export interface FileRouteTypes {
     | '/complete-profile'
     | '/auth/'
     | '/owner/'
-    | '/owner/projects/$projectId'
     | '/owner/projects/create'
     | '/owner/dashboard/'
     | '/owner/projects/'
+    | '/owner/projects/edit/$projectId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/complete-profile'
     | '/auth'
     | '/owner'
-    | '/owner/projects/$projectId'
     | '/owner/projects/create'
     | '/owner/dashboard'
     | '/owner/projects'
+    | '/owner/projects/edit/$projectId'
   id:
     | '__root__'
     | '/'
@@ -129,10 +129,10 @@ export interface FileRouteTypes {
     | '/complete-profile'
     | '/auth/'
     | '/_dashboardLayout/owner/'
-    | '/_dashboardLayout/owner/projects/$projectId'
     | '/_dashboardLayout/owner/projects/create'
     | '/_dashboardLayout/owner/dashboard/'
     | '/_dashboardLayout/owner/projects/'
+    | '/_dashboardLayout/owner/projects/edit/$projectId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -193,13 +193,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardLayoutOwnerProjectsIndexRouteImport
       parentRoute: typeof DashboardLayoutRoute
     }
-    '/_dashboardLayout/owner/projects/$projectId': {
-      id: '/_dashboardLayout/owner/projects/$projectId'
-      path: '/owner/projects/$projectId'
-      fullPath: '/owner/projects/$projectId'
-      preLoaderRoute: typeof DashboardLayoutOwnerProjectsProjectIdRouteImport
-      parentRoute: typeof DashboardLayoutRoute
-    }
     '/_dashboardLayout/owner/projects/create': {
       id: '/_dashboardLayout/owner/projects/create'
       path: '/owner/projects/create'
@@ -207,27 +200,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardLayoutOwnerProjectsCreateRouteImport
       parentRoute: typeof DashboardLayoutRoute
     }
+    '/_dashboardLayout/owner/projects/edit/$projectId': {
+      id: '/_dashboardLayout/owner/projects/edit/$projectId'
+      path: '/owner/projects/edit/$projectId'
+      fullPath: '/owner/projects/edit/$projectId'
+      preLoaderRoute: typeof DashboardLayoutOwnerProjectsEditProjectIdRouteImport
+      parentRoute: typeof DashboardLayoutRoute
+    }
   }
 }
 
 interface DashboardLayoutRouteChildren {
   DashboardLayoutOwnerIndexRoute: typeof DashboardLayoutOwnerIndexRoute
-  DashboardLayoutOwnerProjectsProjectIdRoute: typeof DashboardLayoutOwnerProjectsProjectIdRoute
   DashboardLayoutOwnerProjectsCreateRoute: typeof DashboardLayoutOwnerProjectsCreateRoute
   DashboardLayoutOwnerDashboardIndexRoute: typeof DashboardLayoutOwnerDashboardIndexRoute
   DashboardLayoutOwnerProjectsIndexRoute: typeof DashboardLayoutOwnerProjectsIndexRoute
+  DashboardLayoutOwnerProjectsEditProjectIdRoute: typeof DashboardLayoutOwnerProjectsEditProjectIdRoute
 }
 
 const DashboardLayoutRouteChildren: DashboardLayoutRouteChildren = {
   DashboardLayoutOwnerIndexRoute: DashboardLayoutOwnerIndexRoute,
-  DashboardLayoutOwnerProjectsProjectIdRoute:
-    DashboardLayoutOwnerProjectsProjectIdRoute,
   DashboardLayoutOwnerProjectsCreateRoute:
     DashboardLayoutOwnerProjectsCreateRoute,
   DashboardLayoutOwnerDashboardIndexRoute:
     DashboardLayoutOwnerDashboardIndexRoute,
   DashboardLayoutOwnerProjectsIndexRoute:
     DashboardLayoutOwnerProjectsIndexRoute,
+  DashboardLayoutOwnerProjectsEditProjectIdRoute:
+    DashboardLayoutOwnerProjectsEditProjectIdRoute,
 }
 
 const DashboardLayoutRouteWithChildren = DashboardLayoutRoute._addFileChildren(

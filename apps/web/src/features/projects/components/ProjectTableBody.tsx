@@ -3,6 +3,7 @@ import { Table } from "@/components/Table";
 import type { Projects } from "@/schemas/project";
 import { toPersianNumbersWithComma } from "@/utils/toPersianNumbers";
 import { Status } from "./Status";
+import { truncateText } from "@/utils/textFormatter";
 
 export default function ProjectTableBody({ projects }: { projects: Projects }) {
   return (
@@ -11,6 +12,7 @@ export default function ProjectTableBody({ projects }: { projects: Projects }) {
         <Table.Row key={project._id}>
           <Table.Cell>{index + 1}</Table.Cell>
           <Table.Cell>{project.title}</Table.Cell>
+          <Table.Cell>{truncateText(project.description, 50)}</Table.Cell>
           <Table.Cell>{project.category.title}</Table.Cell>
           <Table.Cell>{toPersianNumbersWithComma(project.budget)}</Table.Cell>
           <Table.Cell>

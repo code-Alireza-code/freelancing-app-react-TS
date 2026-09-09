@@ -5,6 +5,7 @@ export default function ProjectTableHeader() {
     <Table.Header>
       <Table.Cell>#</Table.Cell>
       <Table.Cell>عنوان پروژه</Table.Cell>
+      <Table.Cell>توضیحات پروژه</Table.Cell>
       <Table.Cell>دسته بندی</Table.Cell>
       <Table.Cell>بودجه</Table.Cell>
       <Table.Cell>ددلاین</Table.Cell>

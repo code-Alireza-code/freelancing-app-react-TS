@@ -66,6 +66,7 @@ export function Status({ project }: Props) {
         open={isOpenStatus}
         onClose={handleClose}
         title={`تغییر وضعیت ${project.title}`}
+        showCloseButton={false}
       >
         <FormProvider {...hookform}>
           <form
@@ -83,7 +84,7 @@ export function Status({ project }: Props) {
               <Button variant="primary" type="submit">
                 تغییر
               </Button>
-              <Button variant="outline" type="button">
+              <Button variant="outline" type="button" onClick={handleClose}>
                 لغو
               </Button>
             </div>

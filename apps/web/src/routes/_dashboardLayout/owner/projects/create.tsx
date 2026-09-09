@@ -4,7 +4,7 @@ import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_dashboardLayout/owner/projects/create")(
   {
-    beforeLoad: ({ context }) => {
+    loader: ({ context }) => {
       return context.queryClient.ensureQueryData(
         getAllCategoriesQueryOptions(),
       );

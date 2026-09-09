@@ -35,6 +35,7 @@ export function RemoveButton({ project }: Props) {
         open={isRemoveModalOpen}
         onClose={handleCloseModal}
         title={`آیا از حذف ${project.title} مطمئن هستید ؟`}
+        showCloseButton={false}
       >
         <div className="flex gap-x-2 h-10">
           <Button

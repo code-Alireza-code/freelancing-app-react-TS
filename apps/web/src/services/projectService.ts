@@ -1,12 +1,9 @@
-import { ProjectsSchema, type ProjectData } from "@/schemas/project";
+import { ProjectSchema, ProjectsSchema, type Project } from "@/schemas/project";
 import http from "./httpService";
 import type { ProjectStatusType } from "@/features/projects/schema/projectStatus";
-import type {
-  CreateProjectFormDataType,
-  CreateProjectPayload,
-} from "@/features/projects/schema/createProject";
+import type { CreateProjectPayload } from "@/features/projects/schema/createProject";
 
-export async function getOwnerProjectsApi(): Promise<ProjectData[]> {
+export async function getOwnerProjectsApi(): Promise<Project[]> {
   const { projects } = await http
     .get("/project/owner-projects")
     .then(({ data }) => data.data);
@@ -31,4 +28,23 @@ export async function changeProjectStatusApi({
 
 export async function createProjectApi(data: CreateProjectPayload) {
   return http.post("/project/add", data).then(({ data }) => data.data);
+}
+
+export async function getProjectByIdApi(projectId: string): Promise<Project> {
+  const { project } = await http
+    .get(`/project/${projectId}`)
+    .then(({ data }) => data.data);
+  return ProjectSchema.parse(project);
+}
+
+export async function editProjectApi({
+  data,
+  projectId,
+}: {
+  data: CreateProjectPayload;
+  projectId: string;
+}) {
+  return http
+    .patch(`/project/update/${projectId}`, data)
+    .then(({ data }) => data.data);
 }
