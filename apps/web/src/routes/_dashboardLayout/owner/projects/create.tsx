@@ -1,0 +1,18 @@
+import { CreateProjectForm } from "@/features/projects/components/CreateProjectForm";
+import { getAllCategoriesQueryOptions } from "@/queries/categoryQueries";
+import { createFileRoute } from "@tanstack/react-router";
+
+export const Route = createFileRoute("/_dashboardLayout/owner/projects/create")(
+  {
+    beforeLoad: ({ context }) => {
+      return context.queryClient.ensureQueryData(
+        getAllCategoriesQueryOptions(),
+      );
+    },
+    component: RouteComponent,
+  },
+);
+
+function RouteComponent() {
+  return <CreateProjectForm />;
+}

@@ -1,5 +1,6 @@
 import {
   changeProjectStatusApi,
+  createProjectApi,
   getOwnerProjectsApi,
   removeProjectApi,
 } from "@/services/projectService";
@@ -51,4 +52,12 @@ export const useChangeProjectStatus = () => {
     });
 
   return { changeProjectStatus, isChanging };
+};
+
+export const useCreateProject = () => {
+  const { mutateAsync: createProject, isPending: isCreating } = useMutation({
+    mutationFn: createProjectApi,
+  });
+
+  return { createProject, isCreating };
 };

@@ -20,7 +20,7 @@ function ButtonIcon({
       {...rest}
       type={type}
       disabled={disabled || loading}
-      className={`btn--${variant} ${className} p-0.5`}
+      className={`btn btn--${variant} ${className}`}
     >
       {children}
     </button>

@@ -17,6 +17,7 @@ import { Route as DashboardLayoutOwnerIndexRouteImport } from './routes/_dashboa
 import { Route as DashboardLayoutOwnerDashboardIndexRouteImport } from './routes/_dashboardLayout/owner/dashboard/index'
 import { Route as DashboardLayoutOwnerProjectsIndexRouteImport } from './routes/_dashboardLayout/owner/projects/index'
 import { Route as DashboardLayoutOwnerProjectsProjectIdRouteImport } from './routes/_dashboardLayout/owner/projects/$projectId'
+import { Route as DashboardLayoutOwnerProjectsCreateRouteImport } from './routes/_dashboardLayout/owner/projects/create'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -61,6 +62,12 @@ const DashboardLayoutOwnerProjectsProjectIdRoute =
     path: '/owner/projects/$projectId',
     getParentRoute: () => DashboardLayoutRoute,
   } as any)
+const DashboardLayoutOwnerProjectsCreateRoute =
+  DashboardLayoutOwnerProjectsCreateRouteImport.update({
+    id: '/owner/projects/create',
+    path: '/owner/projects/create',
+    getParentRoute: () => DashboardLayoutRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -68,6 +75,7 @@ export interface FileRoutesByFullPath {
   '/auth/': typeof AuthIndexRoute
   '/owner/': typeof DashboardLayoutOwnerIndexRoute
   '/owner/projects/$projectId': typeof DashboardLayoutOwnerProjectsProjectIdRoute
+  '/owner/projects/create': typeof DashboardLayoutOwnerProjectsCreateRoute
   '/owner/dashboard/': typeof DashboardLayoutOwnerDashboardIndexRoute
   '/owner/projects/': typeof DashboardLayoutOwnerProjectsIndexRoute
 }
@@ -77,6 +85,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthIndexRoute
   '/owner': typeof DashboardLayoutOwnerIndexRoute
   '/owner/projects/$projectId': typeof DashboardLayoutOwnerProjectsProjectIdRoute
+  '/owner/projects/create': typeof DashboardLayoutOwnerProjectsCreateRoute
   '/owner/dashboard': typeof DashboardLayoutOwnerDashboardIndexRoute
   '/owner/projects': typeof DashboardLayoutOwnerProjectsIndexRoute
 }
@@ -88,6 +97,7 @@ export interface FileRoutesById {
   '/auth/': typeof AuthIndexRoute
   '/_dashboardLayout/owner/': typeof DashboardLayoutOwnerIndexRoute
   '/_dashboardLayout/owner/projects/$projectId': typeof DashboardLayoutOwnerProjectsProjectIdRoute
+  '/_dashboardLayout/owner/projects/create': typeof DashboardLayoutOwnerProjectsCreateRoute
   '/_dashboardLayout/owner/dashboard/': typeof DashboardLayoutOwnerDashboardIndexRoute
   '/_dashboardLayout/owner/projects/': typeof DashboardLayoutOwnerProjectsIndexRoute
 }
@@ -99,6 +109,7 @@ export interface FileRouteTypes {
     | '/auth/'
     | '/owner/'
     | '/owner/projects/$projectId'
+    | '/owner/projects/create'
     | '/owner/dashboard/'
     | '/owner/projects/'
   fileRoutesByTo: FileRoutesByTo
@@ -108,6 +119,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/owner'
     | '/owner/projects/$projectId'
+    | '/owner/projects/create'
     | '/owner/dashboard'
     | '/owner/projects'
   id:
@@ -118,6 +130,7 @@ export interface FileRouteTypes {
     | '/auth/'
     | '/_dashboardLayout/owner/'
     | '/_dashboardLayout/owner/projects/$projectId'
+    | '/_dashboardLayout/owner/projects/create'
     | '/_dashboardLayout/owner/dashboard/'
     | '/_dashboardLayout/owner/projects/'
   fileRoutesById: FileRoutesById
@@ -187,12 +200,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardLayoutOwnerProjectsProjectIdRouteImport
       parentRoute: typeof DashboardLayoutRoute
     }
+    '/_dashboardLayout/owner/projects/create': {
+      id: '/_dashboardLayout/owner/projects/create'
+      path: '/owner/projects/create'
+      fullPath: '/owner/projects/create'
+      preLoaderRoute: typeof DashboardLayoutOwnerProjectsCreateRouteImport
+      parentRoute: typeof DashboardLayoutRoute
+    }
   }
 }
 
 interface DashboardLayoutRouteChildren {
   DashboardLayoutOwnerIndexRoute: typeof DashboardLayoutOwnerIndexRoute
   DashboardLayoutOwnerProjectsProjectIdRoute: typeof DashboardLayoutOwnerProjectsProjectIdRoute
+  DashboardLayoutOwnerProjectsCreateRoute: typeof DashboardLayoutOwnerProjectsCreateRoute
   DashboardLayoutOwnerDashboardIndexRoute: typeof DashboardLayoutOwnerDashboardIndexRoute
   DashboardLayoutOwnerProjectsIndexRoute: typeof DashboardLayoutOwnerProjectsIndexRoute
 }
@@ -201,6 +222,8 @@ const DashboardLayoutRouteChildren: DashboardLayoutRouteChildren = {
   DashboardLayoutOwnerIndexRoute: DashboardLayoutOwnerIndexRoute,
   DashboardLayoutOwnerProjectsProjectIdRoute:
     DashboardLayoutOwnerProjectsProjectIdRoute,
+  DashboardLayoutOwnerProjectsCreateRoute:
+    DashboardLayoutOwnerProjectsCreateRoute,
   DashboardLayoutOwnerDashboardIndexRoute:
     DashboardLayoutOwnerDashboardIndexRoute,
   DashboardLayoutOwnerProjectsIndexRoute:
