@@ -1,9 +1,14 @@
-import { ProjectSchema, ProjectsSchema, type Project } from "@/schemas/project";
+import {
+  ProjectSchema,
+  ProjectsSchema,
+  type Project,
+  type Projects,
+} from "@/schemas/project";
 import http from "./httpService";
 import type { ProjectStatusType } from "@/features/projects/schema/projectStatus";
 import type { CreateProjectPayload } from "@/features/projects/schema/createProject";
 
-export async function getOwnerProjectsApi(): Promise<Project[]> {
+export async function getOwnerProjectsApi(): Promise<Projects> {
   const { projects } = await http
     .get("/project/owner-projects")
     .then(({ data }) => data.data);

@@ -1,9 +1,9 @@
 import { Loading } from "@/components/Loading";
 import { Empty } from "@/components/Empty";
 import { Table } from "@/components/Table";
-import { useGetOwnerProjects } from "./queries/projectQueries";
-import ProjectTableHeader from "./components/ProjectTableHeader";
-import ProjectTableBody from "./components/ProjectTableBody";
+import { useGetOwnerProjects } from "../queries/projectQueries";
+import ProjectTableHeader from "./ProjectTableHeader";
+import ProjectTableBody from "./ProjectTableBody";
 import { FaPlus } from "react-icons/fa6";
 import ButtonIcon from "@/ui/ButtonIcon";
 import { useNavigate } from "@tanstack/react-router";

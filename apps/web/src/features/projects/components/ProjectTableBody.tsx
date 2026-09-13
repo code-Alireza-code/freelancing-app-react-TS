@@ -4,8 +4,11 @@ import type { Projects } from "@/schemas/project";
 import { toPersianNumbersWithComma } from "@/utils/toPersianNumbers";
 import { Status } from "./Status";
 import { truncateText } from "@/utils/textFormatter";
+import { IoMdDocument } from "react-icons/io";
+import { useNavigate } from "@tanstack/react-router";
 
 export default function ProjectTableBody({ projects }: { projects: Projects }) {
+  const navigate = useNavigate();
   return (
     <Table.Body>
       {projects.map((project, index: number) => (
@@ -36,6 +39,19 @@ export default function ProjectTableBody({ projects }: { projects: Projects }) {
           </Table.Cell>
           <Table.Cell>
             <ActionButtons project={project} />
+          </Table.Cell>
+          <Table.Cell>
+            <button
+              className="flex items-center justify-center w-full"
+              onClick={() =>
+                navigate({
+                  to: "/owner/projects/$projectId/proposals",
+                  params: { projectId: project._id },
+                })
+              }
+            >
+              <IoMdDocument className="size-5 text-primary-700" />
+            </button>
           </Table.Cell>
         </Table.Row>
       ))}

@@ -4,7 +4,7 @@ import { getAllCategoriesQueryOptions } from "@/queries/categoryQueries";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute(
-  "/_dashboardLayout/owner/projects/edit/$projectId",
+  "/_dashboardLayout/owner/projects/$projectId/edit",
 )({
   loader: async ({ context, params }) => {
     const [categories, project] = await Promise.all([

@@ -1,5 +1,5 @@
 import Modal from "@/components/Modal";
-import type { Project } from "@/schemas/project";
+import type { Projects } from "@/schemas/project";
 import Button from "@/ui/Button";
 import ButtonIcon from "@/ui/ButtonIcon";
 import { useState } from "react";
@@ -7,7 +7,7 @@ import { IoMdTrash } from "react-icons/io";
 import { useRemoveOwnerProject } from "../queries/projectQueries";
 import { toast } from "sonner";
 
-type Props = { project: Project };
+type Props = { project: Projects[number] };
 
 export function RemoveButton({ project }: Props) {
   const [isRemoveModalOpen, setIsremoveModalOpen] = useState(false);

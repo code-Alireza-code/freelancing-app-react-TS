@@ -86,3 +86,11 @@ export const useEditProject = () => {
 
   return { editProject, isEditing };
 };
+
+export const useGetOwnerProject = (projectId: string) => {
+  const { data: project, isLoading } = useQuery(
+    ownerProjectQueryOptions(projectId),
+  );
+
+  return { project, isLoading };
+};

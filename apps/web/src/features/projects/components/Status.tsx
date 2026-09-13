@@ -1,5 +1,5 @@
 import Modal from "@/components/Modal";
-import type { Project } from "@/schemas/project";
+import type { Projects } from "@/schemas/project";
 import Select from "@/ui/Select";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
@@ -8,12 +8,12 @@ import {
   type ProjectStatusType,
 } from "../schema/projectStatus";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ProjectStatus } from "../types/projectStatus";
+import { ProjectStatus } from "../../../constants/projectStatus";
 import Button from "@/ui/Button";
 import { useChangeProjectStatus } from "../queries/projectQueries";
 import { toast } from "sonner";
 
-type Props = { project: Project };
+type Props = { project: Projects[number] };
 
 const statusOptions = [
   {

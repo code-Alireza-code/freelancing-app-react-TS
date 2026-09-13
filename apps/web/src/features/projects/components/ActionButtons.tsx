@@ -1,10 +1,10 @@
-import type { Project } from "@/schemas/project";
+import type { Projects } from "@/schemas/project";
 import { RemoveButton } from "./RemoveButton";
 import ButtonIcon from "@/ui/ButtonIcon";
 import { MdModeEditOutline } from "react-icons/md";
 import { useNavigate } from "@tanstack/react-router";
 
-type Props = { project: Project };
+type Props = { project: Projects[number] };
 
 export default function ActionButtons({ project }: Props) {
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ export default function ActionButtons({ project }: Props) {
       <ButtonIcon
         onClick={() =>
           navigate({
-            to: "/owner/projects/edit/$projectId",
+            to: "/owner/projects/$projectId/edit",
             params: { projectId: project._id },
           })
         }

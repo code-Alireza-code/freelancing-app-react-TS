@@ -251,7 +251,9 @@
   .badge--success {
     @apply bg-green-500 text-white;
   }
-
+  .badge--warning {
+    @apply bg-amber-500 text-white;
+  }
   .badge--danger {
     @apply bg-red-500 text-white;
   }

@@ -10,6 +10,6 @@ function numberWithCommas(x: number | string) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-export function toPersianNumbers(n: string) {
+export function toPersianNumbers(n: string | number) {
   return n.toString().replace(/\d/g, (x) => persianDigits[parseInt(x)]);
 }

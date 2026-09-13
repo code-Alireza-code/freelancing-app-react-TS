@@ -1,5 +1,5 @@
 import z from "zod";
-import { ProjectStatus } from "../types/projectStatus";
+import { ProjectStatus } from "../../../constants/projectStatus";
 
 export const ProjectStatusSchema = z.object({
   status: z.enum(Object.values(ProjectStatus)),

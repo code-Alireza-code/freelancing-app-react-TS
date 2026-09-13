@@ -1,5 +1,5 @@
 import { Loading } from "@/components/Loading";
-import ProjectsTable from "@/features/projects/ProjectsTable";
+import ProjectsTable from "@/features/projects/components/ProjectsTable";
 import { ownerProjectsQueryOptions } from "@/features/projects/queries/projectQueries";
 import { createFileRoute } from "@tanstack/react-router";
 

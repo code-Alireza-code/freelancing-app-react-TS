@@ -13,6 +13,7 @@ export default function ProjectTableHeader() {
       <Table.Cell>فریلنسر</Table.Cell>
       <Table.Cell>وضعیت</Table.Cell>
       <Table.Cell>عملیات</Table.Cell>
+      <Table.Cell>درخواست ها</Table.Cell>
     </Table.Header>
   );
 }

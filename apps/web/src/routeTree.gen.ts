@@ -17,7 +17,8 @@ import { Route as DashboardLayoutOwnerIndexRouteImport } from './routes/_dashboa
 import { Route as DashboardLayoutOwnerDashboardIndexRouteImport } from './routes/_dashboardLayout/owner/dashboard/index'
 import { Route as DashboardLayoutOwnerProjectsIndexRouteImport } from './routes/_dashboardLayout/owner/projects/index'
 import { Route as DashboardLayoutOwnerProjectsCreateRouteImport } from './routes/_dashboardLayout/owner/projects/create'
-import { Route as DashboardLayoutOwnerProjectsEditProjectIdRouteImport } from './routes/_dashboardLayout/owner/projects/edit/$projectId'
+import { Route as DashboardLayoutOwnerProjectsProjectIdEditRouteImport } from './routes/_dashboardLayout/owner/projects/$projectId/edit'
+import { Route as DashboardLayoutOwnerProjectsProjectIdProposalsRouteImport } from './routes/_dashboardLayout/owner/projects/$projectId/proposals'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -62,10 +63,16 @@ const DashboardLayoutOwnerProjectsCreateRoute =
     path: '/owner/projects/create',
     getParentRoute: () => DashboardLayoutRoute,
   } as any)
-const DashboardLayoutOwnerProjectsEditProjectIdRoute =
-  DashboardLayoutOwnerProjectsEditProjectIdRouteImport.update({
-    id: '/owner/projects/edit/$projectId',
-    path: '/owner/projects/edit/$projectId',
+const DashboardLayoutOwnerProjectsProjectIdEditRoute =
+  DashboardLayoutOwnerProjectsProjectIdEditRouteImport.update({
+    id: '/owner/projects/$projectId/edit',
+    path: '/owner/projects/$projectId/edit',
+    getParentRoute: () => DashboardLayoutRoute,
+  } as any)
+const DashboardLayoutOwnerProjectsProjectIdProposalsRoute =
+  DashboardLayoutOwnerProjectsProjectIdProposalsRouteImport.update({
+    id: '/owner/projects/$projectId/proposals',
+    path: '/owner/projects/$projectId/proposals',
     getParentRoute: () => DashboardLayoutRoute,
   } as any)
 
@@ -77,7 +84,8 @@ export interface FileRoutesByFullPath {
   '/owner/projects/create': typeof DashboardLayoutOwnerProjectsCreateRoute
   '/owner/dashboard/': typeof DashboardLayoutOwnerDashboardIndexRoute
   '/owner/projects/': typeof DashboardLayoutOwnerProjectsIndexRoute
-  '/owner/projects/edit/$projectId': typeof DashboardLayoutOwnerProjectsEditProjectIdRoute
+  '/owner/projects/$projectId/edit': typeof DashboardLayoutOwnerProjectsProjectIdEditRoute
+  '/owner/projects/$projectId/proposals': typeof DashboardLayoutOwnerProjectsProjectIdProposalsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -87,7 +95,8 @@ export interface FileRoutesByTo {
   '/owner/projects/create': typeof DashboardLayoutOwnerProjectsCreateRoute
   '/owner/dashboard': typeof DashboardLayoutOwnerDashboardIndexRoute
   '/owner/projects': typeof DashboardLayoutOwnerProjectsIndexRoute
-  '/owner/projects/edit/$projectId': typeof DashboardLayoutOwnerProjectsEditProjectIdRoute
+  '/owner/projects/$projectId/edit': typeof DashboardLayoutOwnerProjectsProjectIdEditRoute
+  '/owner/projects/$projectId/proposals': typeof DashboardLayoutOwnerProjectsProjectIdProposalsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -99,7 +108,8 @@ export interface FileRoutesById {
   '/_dashboardLayout/owner/projects/create': typeof DashboardLayoutOwnerProjectsCreateRoute
   '/_dashboardLayout/owner/dashboard/': typeof DashboardLayoutOwnerDashboardIndexRoute
   '/_dashboardLayout/owner/projects/': typeof DashboardLayoutOwnerProjectsIndexRoute
-  '/_dashboardLayout/owner/projects/edit/$projectId': typeof DashboardLayoutOwnerProjectsEditProjectIdRoute
+  '/_dashboardLayout/owner/projects/$projectId/edit': typeof DashboardLayoutOwnerProjectsProjectIdEditRoute
+  '/_dashboardLayout/owner/projects/$projectId/proposals': typeof DashboardLayoutOwnerProjectsProjectIdProposalsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -111,7 +121,8 @@ export interface FileRouteTypes {
     | '/owner/projects/create'
     | '/owner/dashboard/'
     | '/owner/projects/'
-    | '/owner/projects/edit/$projectId'
+    | '/owner/projects/$projectId/edit'
+    | '/owner/projects/$projectId/proposals'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -121,7 +132,8 @@ export interface FileRouteTypes {
     | '/owner/projects/create'
     | '/owner/dashboard'
     | '/owner/projects'
-    | '/owner/projects/edit/$projectId'
+    | '/owner/projects/$projectId/edit'
+    | '/owner/projects/$projectId/proposals'
   id:
     | '__root__'
     | '/'
@@ -132,7 +144,8 @@ export interface FileRouteTypes {
     | '/_dashboardLayout/owner/projects/create'
     | '/_dashboardLayout/owner/dashboard/'
     | '/_dashboardLayout/owner/projects/'
-    | '/_dashboardLayout/owner/projects/edit/$projectId'
+    | '/_dashboardLayout/owner/projects/$projectId/edit'
+    | '/_dashboardLayout/owner/projects/$projectId/proposals'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -200,11 +213,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardLayoutOwnerProjectsCreateRouteImport
       parentRoute: typeof DashboardLayoutRoute
     }
-    '/_dashboardLayout/owner/projects/edit/$projectId': {
-      id: '/_dashboardLayout/owner/projects/edit/$projectId'
-      path: '/owner/projects/edit/$projectId'
-      fullPath: '/owner/projects/edit/$projectId'
-      preLoaderRoute: typeof DashboardLayoutOwnerProjectsEditProjectIdRouteImport
+    '/_dashboardLayout/owner/projects/$projectId/edit': {
+      id: '/_dashboardLayout/owner/projects/$projectId/edit'
+      path: '/owner/projects/$projectId/edit'
+      fullPath: '/owner/projects/$projectId/edit'
+      preLoaderRoute: typeof DashboardLayoutOwnerProjectsProjectIdEditRouteImport
+      parentRoute: typeof DashboardLayoutRoute
+    }
+    '/_dashboardLayout/owner/projects/$projectId/proposals': {
+      id: '/_dashboardLayout/owner/projects/$projectId/proposals'
+      path: '/owner/projects/$projectId/proposals'
+      fullPath: '/owner/projects/$projectId/proposals'
+      preLoaderRoute: typeof DashboardLayoutOwnerProjectsProjectIdProposalsRouteImport
       parentRoute: typeof DashboardLayoutRoute
     }
   }
@@ -215,7 +235,8 @@ interface DashboardLayoutRouteChildren {
   DashboardLayoutOwnerProjectsCreateRoute: typeof DashboardLayoutOwnerProjectsCreateRoute
   DashboardLayoutOwnerDashboardIndexRoute: typeof DashboardLayoutOwnerDashboardIndexRoute
   DashboardLayoutOwnerProjectsIndexRoute: typeof DashboardLayoutOwnerProjectsIndexRoute
-  DashboardLayoutOwnerProjectsEditProjectIdRoute: typeof DashboardLayoutOwnerProjectsEditProjectIdRoute
+  DashboardLayoutOwnerProjectsProjectIdEditRoute: typeof DashboardLayoutOwnerProjectsProjectIdEditRoute
+  DashboardLayoutOwnerProjectsProjectIdProposalsRoute: typeof DashboardLayoutOwnerProjectsProjectIdProposalsRoute
 }
 
 const DashboardLayoutRouteChildren: DashboardLayoutRouteChildren = {
@@ -226,8 +247,10 @@ const DashboardLayoutRouteChildren: DashboardLayoutRouteChildren = {
     DashboardLayoutOwnerDashboardIndexRoute,
   DashboardLayoutOwnerProjectsIndexRoute:
     DashboardLayoutOwnerProjectsIndexRoute,
-  DashboardLayoutOwnerProjectsEditProjectIdRoute:
-    DashboardLayoutOwnerProjectsEditProjectIdRoute,
+  DashboardLayoutOwnerProjectsProjectIdEditRoute:
+    DashboardLayoutOwnerProjectsProjectIdEditRoute,
+  DashboardLayoutOwnerProjectsProjectIdProposalsRoute:
+    DashboardLayoutOwnerProjectsProjectIdProposalsRoute,
 }
 
 const DashboardLayoutRouteWithChildren = DashboardLayoutRoute._addFileChildren(
