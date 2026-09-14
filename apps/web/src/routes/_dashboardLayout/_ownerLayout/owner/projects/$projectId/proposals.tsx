@@ -3,7 +3,7 @@ import { ownerProjectQueryOptions } from "@/features/projects/queries/projectQue
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute(
-  "/_dashboardLayout/owner/projects/$projectId/proposals",
+  "/_dashboardLayout/_ownerLayout/owner/projects/$projectId/proposals",
 )({
   loader: ({ context, params }) => {
     return context.queryClient.fetchQuery(

@@ -1,7 +1,7 @@
 import CompleteProfileForm from "@/features/auth/components/CompleteProfileForm";
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/complete-profile")({
+export const Route = createFileRoute("/auth/complete-profile")({
   component: RouteComponent,
 });
 

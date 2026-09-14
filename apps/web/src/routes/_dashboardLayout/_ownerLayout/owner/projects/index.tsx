@@ -3,7 +3,7 @@ import ProjectsTable from "@/features/projects/components/ProjectsTable";
 import { ownerProjectsQueryOptions } from "@/features/projects/queries/projectQueries";
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/_dashboardLayout/owner/projects/")({
+export const Route = createFileRoute("/_dashboardLayout/_ownerLayout/owner/projects/")({
   loader: ({ context }) => {
     return context.queryClient.ensureQueryData(ownerProjectsQueryOptions);
   },
