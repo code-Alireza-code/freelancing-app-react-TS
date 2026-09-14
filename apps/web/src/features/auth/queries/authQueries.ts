@@ -1,7 +1,12 @@
-import { checkOtpApi, sendOtpApi } from "@/features/auth/services/authService";
-import { useMutation } from "@tanstack/react-query";
+import {
+  checkOtpApi,
+  logoutApi,
+  sendOtpApi,
+} from "@/features/auth/services/authService";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { CheckOtpDto, SendOtpDataType } from "../schema/authSchema";
 import { toast } from "sonner";
+import { useNavigate } from "@tanstack/react-router";
 
 export const useSendOTP = () => {
   const { mutateAsync: sendOTP, isPending: isSendingOTP } = useMutation({
@@ -43,4 +48,19 @@ export const useResendOTP = () => {
     },
   });
   return { resendOTP, isResendingOTP };
+};
+
+export const useLogout = () => {
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  const { mutateAsync: logout, isPending } = useMutation({
+    mutationFn: logoutApi,
+    retry: false,
+    onSuccess: () => {
+      toast.success("با موفقیت از حساب خارج شدید");
+      queryClient.clear();
+      navigate({ to: "/" });
+    },
+  });
+  return { logout, isPending };
 };

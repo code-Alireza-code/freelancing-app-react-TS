@@ -14,3 +14,7 @@ export async function getUserApi(): Promise<UserData> {
     .then(({ data }) => data.data);
   return UserSchema.parse(user);
 }
+
+export async function logoutApi() {
+  return http.post("/user/logout").then(({ data }) => data.data);
+}

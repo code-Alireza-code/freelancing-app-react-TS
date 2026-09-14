@@ -7,5 +7,5 @@ export function useUser() {
     queryFn: getUserApi,
     retry: false,
   });
-  return { userData: data, error, isLoading };
+  return { user: data, error, isLoading };
 }
