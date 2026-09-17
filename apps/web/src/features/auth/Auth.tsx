@@ -9,7 +9,7 @@ export default function Auth() {
   const [phoneNumber, setPhoneNumber] = useState("");
   return (
     <FormCard>
-      <h1 className="text-center font-bold text-lg text-primary-900 -mt-6 mb-12">
+      <h1 className="text-center font-bold text-lg  -mt-6 mb-12">
         فریلنسینگ اپ
       </h1>
       {step === "send-otp" ? (

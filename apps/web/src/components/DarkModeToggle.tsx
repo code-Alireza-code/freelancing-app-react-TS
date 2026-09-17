@@ -1,10 +1,10 @@
-import { useDarkMode } from "@/hooks/useDarkMode";
+import { useTheme } from "@/hooks/useTheme";
 import ButtonIcon from "@/ui/ButtonIcon";
 import { IoMdSunny, IoMdMoon } from "react-icons/io";
 import { MdMonitor } from "react-icons/md";
 
 export default function DarkModeToggle() {
-  const { theme, setTheme } = useDarkMode();
+  const { theme, setTheme } = useTheme();
 
   const handleChangeTheme = () => {
     switch (theme) {

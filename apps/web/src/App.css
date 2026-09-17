@@ -98,13 +98,6 @@
     --color-success-rgb: 0, 192, 115;
     --color-warning-rgb: 255, 153, 0;
     --color-error-rgb: 255, 71, 87;
-
-    --color-red-500: rgb(239, 68, 68);
-    --color-red-300: rgb(252, 165, 165);
-  }
-
-  :root.light-mode {
-    --background-app-rgb: 255, 255, 255;
   }
 
   :root.dark-mode {
@@ -131,6 +124,7 @@
     font-family: "Vazir", sans-serif;
     user-select: none;
     background-color: rgb(var(--background-app-rgb));
+    color: rgb(var(--color-secondary-900-rgb));
   }
 
   *,
@@ -196,9 +190,6 @@
   }
   * {
     @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
   }
   html {
     @apply font-sans;
