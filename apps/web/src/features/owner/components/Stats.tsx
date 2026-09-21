@@ -3,7 +3,7 @@ import {
   HiCurrencyDollar,
   HiCollection,
 } from "react-icons/hi";
-import Stat from "./Stat";
+import Stat from "../../../components/Stat";
 import type { Projects } from "@/schemas/project";
 
 type Props = { projects: Projects };

@@ -1,4 +1,4 @@
-import DashboardHeader from "@/features/owner/components/DashboardHeader";
+import DashboardHeader from "@/components/DashboardHeader";
 import { useGetOwnerProjects } from "@/features/projects/queries/projectQueries";
 import Stats from "./Stats";
 import { Loading } from "@/components/Loading";
