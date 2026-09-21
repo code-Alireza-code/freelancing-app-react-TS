@@ -1,3 +1,4 @@
+import CreateProposalForm from "@/features/freelancer/components/CreateProposalForm";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute(
@@ -7,5 +8,5 @@ export const Route = createFileRoute(
 });
 
 function RouteComponent() {
-  return <div>create proposal form</div>;
+  return <CreateProposalForm />;
 }

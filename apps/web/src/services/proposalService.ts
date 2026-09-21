@@ -4,6 +4,7 @@ import {
   FreelancerProposalsSchema,
   type FreelancerProposals,
 } from "@/schemas/proposal";
+import type { CreateProposalDataType } from "@/features/freelancer/schema/createProposal";
 
 export async function changeProposalStatusApi({
   proposalId,
@@ -23,4 +24,9 @@ export async function getAllProposalsApi(): Promise<FreelancerProposals> {
     .then(({ data }) => data.data);
 
   return FreelancerProposalsSchema.parse(proposals);
+}
+
+type CreateProposalApiData = CreateProposalDataType & { projectId: string };
+export async function createProposalApi(data: CreateProposalApiData) {
+  return http.post("/proposal/add", data).then(({ data }) => data.data);
 }
