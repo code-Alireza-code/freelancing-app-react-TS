@@ -1,6 +1,8 @@
 import {
+  AllProjectsSchema,
   ProjectSchema,
   ProjectsSchema,
+  type AllProjects,
   type Project,
   type Projects,
 } from "@/schemas/project";
@@ -52,4 +54,11 @@ export async function editProjectApi({
   return http
     .patch(`/project/update/${projectId}`, data)
     .then(({ data }) => data.data);
+}
+
+export async function getAllProjectsApi(): Promise<AllProjects> {
+  const { projects } = await http
+    .get("/project/list")
+    .then(({ data }) => data.data);
+  return AllProjectsSchema.parse(projects);
 }

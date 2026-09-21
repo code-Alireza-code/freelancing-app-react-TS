@@ -11,7 +11,7 @@ import { Loading } from "@/components/Loading";
 
 export function ProposalTable() {
   const { projectId } = useParams({
-    from: "/_dashboardLayout/owner/projects/$projectId/proposals",
+    from: "/_dashboardLayout/_ownerLayout/owner/projects/$projectId/proposals",
   });
 
   const { project, isLoading } = useGetOwnerProject(projectId);

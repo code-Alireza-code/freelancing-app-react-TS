@@ -1,7 +1,35 @@
-import { ProposalStatus } from "@/constants/proposalStatus";
 import { z } from "zod";
+import { ProposalStatus } from "@/constants/proposalStatus";
 
-const PropsalFreelancerSchema = z.object({
+const ProjectCategorySchema = z.object({
+  _id: z.string(),
+  title: z.string(),
+  englishTitle: z.string(),
+});
+
+const ProjectOwnerSchema = z.object({
+  _id: z.string(),
+  name: z.string(),
+  avatarUrl: z.string().nullable(),
+});
+
+const ProjectFreelancerSchema = z.object({
+  _id: z.string(),
+  name: z.string(),
+});
+
+const ProjectBaseSchema = z.object({
+  _id: z.string(),
+  title: z.string(),
+  description: z.string(),
+  status: z.enum(["OPEN", "CLOSED"]),
+  category: ProjectCategorySchema,
+  budget: z.number(),
+  tags: z.array(z.string()).optional(),
+  deadline: z.coerce.date(),
+});
+
+const ProposalFreelancerSchema = z.object({
   _id: z.string(),
   name: z.string(),
   avatarUrl: z.string().nullable(),
@@ -18,70 +46,32 @@ const ProposalSchema = z
       z.literal(Number(ProposalStatus.approved)),
       z.literal(Number(ProposalStatus.awaiting)),
     ]),
-    user: PropsalFreelancerSchema,
+    user: ProposalFreelancerSchema,
   })
   .catchall(z.unknown());
 
-export const ProjectSchema = z
-  .object({
-    _id: z.string(),
-    title: z.string(),
-    description: z.string(),
-    status: z.enum(["OPEN", "CLOSED"]),
-    category: z.object({
-      _id: z.string(),
-      title: z.string(),
-      englishTitle: z.string(),
-    }),
-    budget: z.number(),
-    tags: z.array(z.string()).optional(),
-    proposals: z.array(ProposalSchema),
-    deadline: z.coerce.date(),
-    owner: z.object({
-      _id: z.string(),
-      name: z.string(),
-      avatarUrl: z.string().nullable(),
-    }),
-    freelancer: z
-      .object({
-        _id: z.string(),
-        name: z.string(),
-      })
-      .nullable(),
-  })
-  .catchall(z.unknown());
-
-export const ProjectsSchema = z.array(
-  z
-    .object({
-      _id: z.string(),
-      title: z.string(),
-      description: z.string(),
-      status: z.enum(["OPEN", "CLOSED"]),
-      category: z.object({
-        _id: z.string(),
-        title: z.string(),
-        englishTitle: z.string(),
-      }),
-      budget: z.number(),
-      tags: z.array(z.string()).optional(),
-      proposals: z.array(z.string()),
-      deadline: z.coerce.date(),
-      owner: z.object({
-        _id: z.string(),
-        name: z.string(),
-        avatarUrl: z.string().nullable(),
-      }),
-      freelancer: z
-        .object({
-          _id: z.string(),
-          name: z.string(),
-        })
-        .nullable(),
-    })
-    .catchall(z.unknown()),
-);
+export const ProjectSchema = ProjectBaseSchema.extend({
+  proposals: z.array(ProposalSchema),
+  owner: ProjectOwnerSchema,
+  freelancer: ProjectFreelancerSchema.nullable(),
+}).catchall(z.unknown());
 
 export type ProjectProposal = z.infer<typeof ProposalSchema>;
 export type Project = z.infer<typeof ProjectSchema>;
+
+export const AllProjectSchema = ProjectBaseSchema.catchall(z.unknown());
+
+export const AllProjectsSchema = z.array(AllProjectSchema);
+
+export type AllProject = z.infer<typeof AllProjectSchema>;
+export type AllProjects = z.infer<typeof AllProjectsSchema>;
+
+export const ProjectsSchema = z.array(
+  ProjectBaseSchema.extend({
+    proposals: z.array(z.string()),
+    owner: ProjectOwnerSchema,
+    freelancer: ProjectFreelancerSchema.nullable(),
+  }).catchall(z.unknown()),
+);
+
 export type Projects = z.infer<typeof ProjectsSchema>;

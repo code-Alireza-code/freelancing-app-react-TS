@@ -9,7 +9,7 @@ type NavLinkProps = {
 
 export default function NavLink({ children, to, className }: NavLinkProps) {
   return (
-    <Link to={to} className={`flex gap-x-4 text-lg ${className}`}>
+    <Link to={to} className={className}>
       {children}
     </Link>
   );

@@ -36,7 +36,7 @@ export default function Status({ proposal }: Props) {
   const handleClose = () => setIsOpenStatus(false);
 
   const { projectId } = useParams({
-    from: "/_dashboardLayout/owner/projects/$projectId/proposals",
+    from: "/_dashboardLayout/_ownerLayout/owner/projects/$projectId/proposals",
   });
 
   const hookform = useForm<ProposalStatusType>({

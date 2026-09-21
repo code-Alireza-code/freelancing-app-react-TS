@@ -11,15 +11,21 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DashboardLayoutRouteRouteImport } from './routes/_dashboardLayout/route'
+import { Route as DashboardLayoutFreelancerLayoutRouteRouteImport } from './routes/_dashboardLayout/_freelancerLayout/route'
 import { Route as DashboardLayoutOwnerLayoutRouteRouteImport } from './routes/_dashboardLayout/_ownerLayout/route'
 import { Route as AuthIndexRouteImport } from './routes/auth/index'
 import { Route as AuthCompleteProfileRouteImport } from './routes/auth/complete-profile'
+import { Route as DashboardLayoutFreelancerLayoutFreelancerIndexRouteImport } from './routes/_dashboardLayout/_freelancerLayout/freelancer/index'
 import { Route as DashboardLayoutOwnerLayoutOwnerIndexRouteImport } from './routes/_dashboardLayout/_ownerLayout/owner/index'
+import { Route as DashboardLayoutFreelancerLayoutFreelancerDashboardIndexRouteImport } from './routes/_dashboardLayout/_freelancerLayout/freelancer/dashboard/index'
+import { Route as DashboardLayoutFreelancerLayoutFreelancerProjectsIndexRouteImport } from './routes/_dashboardLayout/_freelancerLayout/freelancer/projects/index'
+import { Route as DashboardLayoutFreelancerLayoutFreelancerProposalsIndexRouteImport } from './routes/_dashboardLayout/_freelancerLayout/freelancer/proposals/index'
 import { Route as DashboardLayoutOwnerLayoutOwnerDashboardIndexRouteImport } from './routes/_dashboardLayout/_ownerLayout/owner/dashboard/index'
 import { Route as DashboardLayoutOwnerLayoutOwnerProjectsIndexRouteImport } from './routes/_dashboardLayout/_ownerLayout/owner/projects/index'
 import { Route as DashboardLayoutOwnerLayoutOwnerProjectsCreateRouteImport } from './routes/_dashboardLayout/_ownerLayout/owner/projects/create'
 import { Route as DashboardLayoutOwnerLayoutOwnerProjectsProjectIdEditRouteImport } from './routes/_dashboardLayout/_ownerLayout/owner/projects/$projectId/edit'
 import { Route as DashboardLayoutOwnerLayoutOwnerProjectsProjectIdProposalsRouteImport } from './routes/_dashboardLayout/_ownerLayout/owner/projects/$projectId/proposals'
+import { Route as DashboardLayoutFreelancerLayoutFreelancerProjectsProjectIdProposalCreateIndexRouteImport } from './routes/_dashboardLayout/_freelancerLayout/freelancer/projects/$projectId/proposal/create/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -30,6 +36,11 @@ const DashboardLayoutRouteRoute = DashboardLayoutRouteRouteImport.update({
   id: '/_dashboardLayout',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardLayoutFreelancerLayoutRouteRoute =
+  DashboardLayoutFreelancerLayoutRouteRouteImport.update({
+    id: '/_freelancerLayout',
+    getParentRoute: () => DashboardLayoutRouteRoute,
+  } as any)
 const DashboardLayoutOwnerLayoutRouteRoute =
   DashboardLayoutOwnerLayoutRouteRouteImport.update({
     id: '/_ownerLayout',
@@ -45,11 +56,35 @@ const AuthCompleteProfileRoute = AuthCompleteProfileRouteImport.update({
   path: '/auth/complete-profile',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardLayoutFreelancerLayoutFreelancerIndexRoute =
+  DashboardLayoutFreelancerLayoutFreelancerIndexRouteImport.update({
+    id: '/freelancer/',
+    path: '/freelancer/',
+    getParentRoute: () => DashboardLayoutFreelancerLayoutRouteRoute,
+  } as any)
 const DashboardLayoutOwnerLayoutOwnerIndexRoute =
   DashboardLayoutOwnerLayoutOwnerIndexRouteImport.update({
     id: '/owner/',
     path: '/owner/',
     getParentRoute: () => DashboardLayoutOwnerLayoutRouteRoute,
+  } as any)
+const DashboardLayoutFreelancerLayoutFreelancerDashboardIndexRoute =
+  DashboardLayoutFreelancerLayoutFreelancerDashboardIndexRouteImport.update({
+    id: '/freelancer/dashboard/',
+    path: '/freelancer/dashboard/',
+    getParentRoute: () => DashboardLayoutFreelancerLayoutRouteRoute,
+  } as any)
+const DashboardLayoutFreelancerLayoutFreelancerProjectsIndexRoute =
+  DashboardLayoutFreelancerLayoutFreelancerProjectsIndexRouteImport.update({
+    id: '/freelancer/projects/',
+    path: '/freelancer/projects/',
+    getParentRoute: () => DashboardLayoutFreelancerLayoutRouteRoute,
+  } as any)
+const DashboardLayoutFreelancerLayoutFreelancerProposalsIndexRoute =
+  DashboardLayoutFreelancerLayoutFreelancerProposalsIndexRouteImport.update({
+    id: '/freelancer/proposals/',
+    path: '/freelancer/proposals/',
+    getParentRoute: () => DashboardLayoutFreelancerLayoutRouteRoute,
   } as any)
 const DashboardLayoutOwnerLayoutOwnerDashboardIndexRoute =
   DashboardLayoutOwnerLayoutOwnerDashboardIndexRouteImport.update({
@@ -81,42 +116,66 @@ const DashboardLayoutOwnerLayoutOwnerProjectsProjectIdProposalsRoute =
     path: '/owner/projects/$projectId/proposals',
     getParentRoute: () => DashboardLayoutOwnerLayoutRouteRoute,
   } as any)
+const DashboardLayoutFreelancerLayoutFreelancerProjectsProjectIdProposalCreateIndexRoute =
+  DashboardLayoutFreelancerLayoutFreelancerProjectsProjectIdProposalCreateIndexRouteImport.update(
+    {
+      id: '/freelancer/projects/$projectId/proposal/create/',
+      path: '/freelancer/projects/$projectId/proposal/create/',
+      getParentRoute: () => DashboardLayoutFreelancerLayoutRouteRoute,
+    } as any,
+  )
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth/complete-profile': typeof AuthCompleteProfileRoute
   '/auth/': typeof AuthIndexRoute
+  '/freelancer/': typeof DashboardLayoutFreelancerLayoutFreelancerIndexRoute
   '/owner/': typeof DashboardLayoutOwnerLayoutOwnerIndexRoute
   '/owner/projects/create': typeof DashboardLayoutOwnerLayoutOwnerProjectsCreateRoute
+  '/freelancer/dashboard/': typeof DashboardLayoutFreelancerLayoutFreelancerDashboardIndexRoute
+  '/freelancer/projects/': typeof DashboardLayoutFreelancerLayoutFreelancerProjectsIndexRoute
+  '/freelancer/proposals/': typeof DashboardLayoutFreelancerLayoutFreelancerProposalsIndexRoute
   '/owner/dashboard/': typeof DashboardLayoutOwnerLayoutOwnerDashboardIndexRoute
   '/owner/projects/': typeof DashboardLayoutOwnerLayoutOwnerProjectsIndexRoute
   '/owner/projects/$projectId/edit': typeof DashboardLayoutOwnerLayoutOwnerProjectsProjectIdEditRoute
   '/owner/projects/$projectId/proposals': typeof DashboardLayoutOwnerLayoutOwnerProjectsProjectIdProposalsRoute
+  '/freelancer/projects/$projectId/proposal/create/': typeof DashboardLayoutFreelancerLayoutFreelancerProjectsProjectIdProposalCreateIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth/complete-profile': typeof AuthCompleteProfileRoute
   '/auth': typeof AuthIndexRoute
+  '/freelancer': typeof DashboardLayoutFreelancerLayoutFreelancerIndexRoute
   '/owner': typeof DashboardLayoutOwnerLayoutOwnerIndexRoute
   '/owner/projects/create': typeof DashboardLayoutOwnerLayoutOwnerProjectsCreateRoute
+  '/freelancer/dashboard': typeof DashboardLayoutFreelancerLayoutFreelancerDashboardIndexRoute
+  '/freelancer/projects': typeof DashboardLayoutFreelancerLayoutFreelancerProjectsIndexRoute
+  '/freelancer/proposals': typeof DashboardLayoutFreelancerLayoutFreelancerProposalsIndexRoute
   '/owner/dashboard': typeof DashboardLayoutOwnerLayoutOwnerDashboardIndexRoute
   '/owner/projects': typeof DashboardLayoutOwnerLayoutOwnerProjectsIndexRoute
   '/owner/projects/$projectId/edit': typeof DashboardLayoutOwnerLayoutOwnerProjectsProjectIdEditRoute
   '/owner/projects/$projectId/proposals': typeof DashboardLayoutOwnerLayoutOwnerProjectsProjectIdProposalsRoute
+  '/freelancer/projects/$projectId/proposal/create': typeof DashboardLayoutFreelancerLayoutFreelancerProjectsProjectIdProposalCreateIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_dashboardLayout': typeof DashboardLayoutRouteRouteWithChildren
+  '/_dashboardLayout/_freelancerLayout': typeof DashboardLayoutFreelancerLayoutRouteRouteWithChildren
   '/_dashboardLayout/_ownerLayout': typeof DashboardLayoutOwnerLayoutRouteRouteWithChildren
   '/auth/complete-profile': typeof AuthCompleteProfileRoute
   '/auth/': typeof AuthIndexRoute
+  '/_dashboardLayout/_freelancerLayout/freelancer/': typeof DashboardLayoutFreelancerLayoutFreelancerIndexRoute
   '/_dashboardLayout/_ownerLayout/owner/': typeof DashboardLayoutOwnerLayoutOwnerIndexRoute
   '/_dashboardLayout/_ownerLayout/owner/projects/create': typeof DashboardLayoutOwnerLayoutOwnerProjectsCreateRoute
+  '/_dashboardLayout/_freelancerLayout/freelancer/dashboard/': typeof DashboardLayoutFreelancerLayoutFreelancerDashboardIndexRoute
+  '/_dashboardLayout/_freelancerLayout/freelancer/projects/': typeof DashboardLayoutFreelancerLayoutFreelancerProjectsIndexRoute
+  '/_dashboardLayout/_freelancerLayout/freelancer/proposals/': typeof DashboardLayoutFreelancerLayoutFreelancerProposalsIndexRoute
   '/_dashboardLayout/_ownerLayout/owner/dashboard/': typeof DashboardLayoutOwnerLayoutOwnerDashboardIndexRoute
   '/_dashboardLayout/_ownerLayout/owner/projects/': typeof DashboardLayoutOwnerLayoutOwnerProjectsIndexRoute
   '/_dashboardLayout/_ownerLayout/owner/projects/$projectId/edit': typeof DashboardLayoutOwnerLayoutOwnerProjectsProjectIdEditRoute
   '/_dashboardLayout/_ownerLayout/owner/projects/$projectId/proposals': typeof DashboardLayoutOwnerLayoutOwnerProjectsProjectIdProposalsRoute
+  '/_dashboardLayout/_freelancerLayout/freelancer/projects/$projectId/proposal/create/': typeof DashboardLayoutFreelancerLayoutFreelancerProjectsProjectIdProposalCreateIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -124,36 +183,52 @@ export interface FileRouteTypes {
     | '/'
     | '/auth/complete-profile'
     | '/auth/'
+    | '/freelancer/'
     | '/owner/'
     | '/owner/projects/create'
+    | '/freelancer/dashboard/'
+    | '/freelancer/projects/'
+    | '/freelancer/proposals/'
     | '/owner/dashboard/'
     | '/owner/projects/'
     | '/owner/projects/$projectId/edit'
     | '/owner/projects/$projectId/proposals'
+    | '/freelancer/projects/$projectId/proposal/create/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auth/complete-profile'
     | '/auth'
+    | '/freelancer'
     | '/owner'
     | '/owner/projects/create'
+    | '/freelancer/dashboard'
+    | '/freelancer/projects'
+    | '/freelancer/proposals'
     | '/owner/dashboard'
     | '/owner/projects'
     | '/owner/projects/$projectId/edit'
     | '/owner/projects/$projectId/proposals'
+    | '/freelancer/projects/$projectId/proposal/create'
   id:
     | '__root__'
     | '/'
     | '/_dashboardLayout'
+    | '/_dashboardLayout/_freelancerLayout'
     | '/_dashboardLayout/_ownerLayout'
     | '/auth/complete-profile'
     | '/auth/'
+    | '/_dashboardLayout/_freelancerLayout/freelancer/'
     | '/_dashboardLayout/_ownerLayout/owner/'
     | '/_dashboardLayout/_ownerLayout/owner/projects/create'
+    | '/_dashboardLayout/_freelancerLayout/freelancer/dashboard/'
+    | '/_dashboardLayout/_freelancerLayout/freelancer/projects/'
+    | '/_dashboardLayout/_freelancerLayout/freelancer/proposals/'
     | '/_dashboardLayout/_ownerLayout/owner/dashboard/'
     | '/_dashboardLayout/_ownerLayout/owner/projects/'
     | '/_dashboardLayout/_ownerLayout/owner/projects/$projectId/edit'
     | '/_dashboardLayout/_ownerLayout/owner/projects/$projectId/proposals'
+    | '/_dashboardLayout/_freelancerLayout/freelancer/projects/$projectId/proposal/create/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -179,6 +254,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardLayoutRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_dashboardLayout/_freelancerLayout': {
+      id: '/_dashboardLayout/_freelancerLayout'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof DashboardLayoutFreelancerLayoutRouteRouteImport
+      parentRoute: typeof DashboardLayoutRouteRoute
+    }
     '/_dashboardLayout/_ownerLayout': {
       id: '/_dashboardLayout/_ownerLayout'
       path: ''
@@ -200,12 +282,40 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthCompleteProfileRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_dashboardLayout/_freelancerLayout/freelancer/': {
+      id: '/_dashboardLayout/_freelancerLayout/freelancer/'
+      path: '/freelancer'
+      fullPath: '/freelancer/'
+      preLoaderRoute: typeof DashboardLayoutFreelancerLayoutFreelancerIndexRouteImport
+      parentRoute: typeof DashboardLayoutFreelancerLayoutRouteRoute
+    }
     '/_dashboardLayout/_ownerLayout/owner/': {
       id: '/_dashboardLayout/_ownerLayout/owner/'
       path: '/owner'
       fullPath: '/owner/'
       preLoaderRoute: typeof DashboardLayoutOwnerLayoutOwnerIndexRouteImport
       parentRoute: typeof DashboardLayoutOwnerLayoutRouteRoute
+    }
+    '/_dashboardLayout/_freelancerLayout/freelancer/dashboard/': {
+      id: '/_dashboardLayout/_freelancerLayout/freelancer/dashboard/'
+      path: '/freelancer/dashboard'
+      fullPath: '/freelancer/dashboard/'
+      preLoaderRoute: typeof DashboardLayoutFreelancerLayoutFreelancerDashboardIndexRouteImport
+      parentRoute: typeof DashboardLayoutFreelancerLayoutRouteRoute
+    }
+    '/_dashboardLayout/_freelancerLayout/freelancer/projects/': {
+      id: '/_dashboardLayout/_freelancerLayout/freelancer/projects/'
+      path: '/freelancer/projects'
+      fullPath: '/freelancer/projects/'
+      preLoaderRoute: typeof DashboardLayoutFreelancerLayoutFreelancerProjectsIndexRouteImport
+      parentRoute: typeof DashboardLayoutFreelancerLayoutRouteRoute
+    }
+    '/_dashboardLayout/_freelancerLayout/freelancer/proposals/': {
+      id: '/_dashboardLayout/_freelancerLayout/freelancer/proposals/'
+      path: '/freelancer/proposals'
+      fullPath: '/freelancer/proposals/'
+      preLoaderRoute: typeof DashboardLayoutFreelancerLayoutFreelancerProposalsIndexRouteImport
+      parentRoute: typeof DashboardLayoutFreelancerLayoutRouteRoute
     }
     '/_dashboardLayout/_ownerLayout/owner/dashboard/': {
       id: '/_dashboardLayout/_ownerLayout/owner/dashboard/'
@@ -242,8 +352,42 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardLayoutOwnerLayoutOwnerProjectsProjectIdProposalsRouteImport
       parentRoute: typeof DashboardLayoutOwnerLayoutRouteRoute
     }
+    '/_dashboardLayout/_freelancerLayout/freelancer/projects/$projectId/proposal/create/': {
+      id: '/_dashboardLayout/_freelancerLayout/freelancer/projects/$projectId/proposal/create/'
+      path: '/freelancer/projects/$projectId/proposal/create'
+      fullPath: '/freelancer/projects/$projectId/proposal/create/'
+      preLoaderRoute: typeof DashboardLayoutFreelancerLayoutFreelancerProjectsProjectIdProposalCreateIndexRouteImport
+      parentRoute: typeof DashboardLayoutFreelancerLayoutRouteRoute
+    }
   }
 }
+
+interface DashboardLayoutFreelancerLayoutRouteRouteChildren {
+  DashboardLayoutFreelancerLayoutFreelancerIndexRoute: typeof DashboardLayoutFreelancerLayoutFreelancerIndexRoute
+  DashboardLayoutFreelancerLayoutFreelancerDashboardIndexRoute: typeof DashboardLayoutFreelancerLayoutFreelancerDashboardIndexRoute
+  DashboardLayoutFreelancerLayoutFreelancerProjectsIndexRoute: typeof DashboardLayoutFreelancerLayoutFreelancerProjectsIndexRoute
+  DashboardLayoutFreelancerLayoutFreelancerProposalsIndexRoute: typeof DashboardLayoutFreelancerLayoutFreelancerProposalsIndexRoute
+  DashboardLayoutFreelancerLayoutFreelancerProjectsProjectIdProposalCreateIndexRoute: typeof DashboardLayoutFreelancerLayoutFreelancerProjectsProjectIdProposalCreateIndexRoute
+}
+
+const DashboardLayoutFreelancerLayoutRouteRouteChildren: DashboardLayoutFreelancerLayoutRouteRouteChildren =
+  {
+    DashboardLayoutFreelancerLayoutFreelancerIndexRoute:
+      DashboardLayoutFreelancerLayoutFreelancerIndexRoute,
+    DashboardLayoutFreelancerLayoutFreelancerDashboardIndexRoute:
+      DashboardLayoutFreelancerLayoutFreelancerDashboardIndexRoute,
+    DashboardLayoutFreelancerLayoutFreelancerProjectsIndexRoute:
+      DashboardLayoutFreelancerLayoutFreelancerProjectsIndexRoute,
+    DashboardLayoutFreelancerLayoutFreelancerProposalsIndexRoute:
+      DashboardLayoutFreelancerLayoutFreelancerProposalsIndexRoute,
+    DashboardLayoutFreelancerLayoutFreelancerProjectsProjectIdProposalCreateIndexRoute:
+      DashboardLayoutFreelancerLayoutFreelancerProjectsProjectIdProposalCreateIndexRoute,
+  }
+
+const DashboardLayoutFreelancerLayoutRouteRouteWithChildren =
+  DashboardLayoutFreelancerLayoutRouteRoute._addFileChildren(
+    DashboardLayoutFreelancerLayoutRouteRouteChildren,
+  )
 
 interface DashboardLayoutOwnerLayoutRouteRouteChildren {
   DashboardLayoutOwnerLayoutOwnerIndexRoute: typeof DashboardLayoutOwnerLayoutOwnerIndexRoute
@@ -276,10 +420,13 @@ const DashboardLayoutOwnerLayoutRouteRouteWithChildren =
   )
 
 interface DashboardLayoutRouteRouteChildren {
+  DashboardLayoutFreelancerLayoutRouteRoute: typeof DashboardLayoutFreelancerLayoutRouteRouteWithChildren
   DashboardLayoutOwnerLayoutRouteRoute: typeof DashboardLayoutOwnerLayoutRouteRouteWithChildren
 }
 
 const DashboardLayoutRouteRouteChildren: DashboardLayoutRouteRouteChildren = {
+  DashboardLayoutFreelancerLayoutRouteRoute:
+    DashboardLayoutFreelancerLayoutRouteRouteWithChildren,
   DashboardLayoutOwnerLayoutRouteRoute:
     DashboardLayoutOwnerLayoutRouteRouteWithChildren,
 }
